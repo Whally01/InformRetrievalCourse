@@ -5,6 +5,8 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="str.href" />
+          <option value="typing.ItemsView.__add__" />
+          <option value="str.__setitem__" />
         </list>
       </option>
     </inspection_tool>
