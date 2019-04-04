@@ -99,7 +99,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
-
+#IntellijIDEA
+.idea
 # mypy
 .mypy_cache/
 
