@@ -37,11 +37,12 @@ def search(data, index, query):
     query_splitted = query.split()
     result = []
     for docname in data:
-        check = False
         query_copy = query
         for word in query_splitted:
-            if word == '~':
-                query_copy = query_copy.replace(word, 'not')
+            check = 0
+
+            # if word == '~':
+            #     query_copy = query_copy.replace(word, 'not')
 
             if word.isalnum():
                 m = morph.parse(word)[0]
@@ -49,10 +50,11 @@ def search(data, index, query):
 
                 if lem in index:  # если слово было проиндексировано
                     if docname in index[lem]:
-                        check = True
+                        check = 1
                 query_copy = query_copy.replace(word, check.__str__())
-        c = eval(query_copy)
-        if c:
+
+        if eval(query_copy):
+            # print_result(query_copy)
             result.append(docname)
 
     return result
@@ -70,7 +72,7 @@ for dic in data:
 
 
 def print_result(result):
-    print('кол-во док-ов: {0} \n {1}'.format(len(result), result))
+    print('кол-во док-ов: {0} \n {1} \n {2}'.format(len(result), result, '-' * 80))
 
 
 # json.dump(index, open('invert_index_new.json', 'w', encoding='utf-8'), ensure_ascii=False)
@@ -79,11 +81,12 @@ def print_result(result):
 # df.to_csv('invert_new.csv', sep=',', encoding='utf-8')
 
 
-# print_result(search(dict, index, 'радио'))
-#
-# print_result(search(dict, index, 'радио & ~ утро'))
+print_result(search(dict, index, 'радио'))
 
-print_result(search(dict, index, '~ когда'))
+print_result(search(dict, index, 'радио & ~ утро'))
 
-print_result(search(dict, index, 'шкатулка  & ( такие )'))
-print_result(search(dict, index, 'шкатулка  &  ~ такие '))
+print_result(search(dict, index, 'шкатулка | такие'))
+
+print_result(search(dict, index, 'шкатулка  &  ~ такие'))
+
+print_result(search(dict, index, '~ дефицит & корабль & гемма | дефицит '))

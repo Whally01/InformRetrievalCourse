@@ -41,11 +41,11 @@ df = pd.DataFrame()
 
 df_tfidf = df.from_dict(tf_idf)
 df_tf = df.from_dict(tf_dict)
-# df_idf = df.from_dict(idf_list)
-# df_idf = pd.DataFrame(idf_list, index=idf_list.keys())
+#df_idf = df.from_dict(idf_list)
+df_idf = pd.DataFrame(idf_list, index=idf_list.keys())
 
 df_tfidf.to_csv('tf_idf.csv', sep=',', encoding='utf-8')
 df_tf.to_csv('tf.csv', sep=',', encoding='utf-8')
-# df_idf.to_csv('idf.csv', sep=',', encoding='utf-8')
+df_idf.to_csv('idf.csv', sep=',', encoding='utf-8')
 
 json.dump(idf_list, open('idf.json', 'w', encoding='utf-8'), ensure_ascii=False)
